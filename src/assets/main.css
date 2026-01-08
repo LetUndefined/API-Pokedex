@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --type-bug: #a7b723;
+  --type-dark: #75574c;
+  --type-dragon: #7037ff;
+  --type-electric: #f9cf30;
+  --type-fairy: #e69eac;
+  --type-fighting: #c12239;
+  --type-fire: #f57d31;
+  --type-flying: #a891ec;
+  --type-ghost: #70559b;
+  --type-normal: #aaa67f;
+  --type-grass: #74cb48;
+  --type-ground: #dec16b;
+  --type-ice: #9ad6df;
+  --type-poison: #a43e9e;
+  --type-psychic: #fb5584;
+  --type-rock: #b69e31;
+  --type-steel: #b7b9d0;
+  --type-water: #6493eb;
+
+  --color-primary: #dc0a2d;
+  --color-background: #efefef;
+
+  --color-grayscale-white: #ffffff;
+  --color-grayscale-light: #e0e0e0;
+  --color-grayscale-medium: #666666;
+  --color-grayscale-dark: #212121;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-grayscale-dark);
+}
