@@ -1,5 +1,7 @@
 # Pokédex - Vue Edition
 
+<!-- https://www.figma.com/community/file/979132880663340794/pokedex -->
+
 Om alle concepten van Vue aan te leren, zal er doorheen het opleidingsonderdeel een Pokédex-applicatie worden gebouwd. Deze applicatie zal elk hoofdstuk verder worden uitgebreid met nieuwe functionaliteiten en concepten.
 
 | Overizchtspagina                                | Detailpagina                                  |
