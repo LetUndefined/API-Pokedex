@@ -19,26 +19,26 @@ import search from '@/assets/search-2.svg';
       <div class="pokemon-container">
         <router-link :to="{ name: 'DetailView', params: { id: 'bulbasaur' } }">
           <img src="https://img.pokemondb.net/sprites/home/normal/2x/avif/bulbasaur.avif" alt="" />
-          <p>Bulbasaur</p>
         </router-link>
+        <p>Bulbasaur</p>
       </div>
       <div class="pokemon-container">
         <router-link :to="{ name: 'DetailView', params: { id: 'charmander' } }">
           <img src="https://img.pokemondb.net/sprites/home/normal/2x/avif/charmander.avif" alt="" />
-          <p>Charmander</p>
         </router-link>
+        <p>Charmander</p>
       </div>
       <div class="pokemon-container">
         <router-link :to="{ name: 'DetailView', params: { id: 'squirtle' } }">
           <img src="https://img.pokemondb.net/sprites/home/normal/2x/avif/squirtle.avif" alt="" />
-          <p>Squirtle</p>
         </router-link>
+        <p>Squirtle</p>
       </div>
       <div class="pokemon-container">
         <router-link :to="{ name: 'DetailView', params: { id: 'pikachu' } }">
           <img src="https://img.pokemondb.net/sprites/home/normal/2x/avif/pikachu.avif" alt="" />
-          <p>Pikachu</p>
         </router-link>
+        <p>Pikachu</p>
       </div>
     </main>
   </div>
