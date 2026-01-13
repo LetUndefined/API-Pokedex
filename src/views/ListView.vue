@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import pokeball from '@/assets/pokeball.svg';
 import search from '@/assets/search-2.svg';
+
+import { ref } from 'vue';
+
+const pokemonList = ref([
+  { name: 'bulbasaur' },
+  { name: 'charmander' },
+  { name: 'squirtle' },
+  { name: 'pikachu' },
+]);
 </script>
 
 <template>
