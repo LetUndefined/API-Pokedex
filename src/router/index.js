@@ -9,16 +9,18 @@ const router = createRouter({
     {
       path: '/',
       component: MainLayout,
-      children: [{
-        path: '',
-        name: 'Listview',
-        component: ListView
-      },
-    {
-      path: 'pokemon/:id',
-      name: 'DetailView',
-      component: () => import('@/views/DetailView.vue')
-    }],
+      children: [
+        {
+          path: '',
+          name: 'Listview',
+          component: ListView,
+        },
+        {
+          path: 'pokemon/:id',
+          name: 'Detailview',
+          component: () => import('@/views/DetailView.vue'),
+        },
+      ],
     },
   ],
 });
