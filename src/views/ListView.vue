@@ -2,20 +2,12 @@
 import PokemonListHeader from '@/components/PokemonListHeader.vue';
 import PokemonListItem from '@/components/PokemonListItem.vue';
 import PokemonList from '@/components/PokemonList.vue';
-import { ref } from 'vue';
 
-const pokemonList = ref([
-  { id: 1, name: 'Bulbasaur' },
-  { id: 2, name: 'Ivysaur' },
-  { id: 3, name: 'Venusaur' },
-  { id: 4, name: 'Charmander' },
-  { id: 5, name: 'Charmeleon' },
-  { id: 6, name: 'Charizard' },
-  { id: 7, name: 'Squirtle' },
-  { id: 8, name: 'Wartortle' },
-  { id: 9, name: 'Blastoise' },
-  { id: 25, name: 'Pikachu' },
-]);
+import { usePokemonStore } from '@/stores/pokemon';
+import { storeToRefs } from 'pinia';
+
+const pokemonStore = usePokemonStore();
+const { pokemonList } = storeToRefs(pokemonStore);
 </script>
 
 <template>
@@ -39,7 +31,6 @@ const pokemonList = ref([
   height: 100vh;
   background-color: var(--color-primary);
   padding: 0.25rem;
-
   display: flex;
   flex-direction: column;
 }

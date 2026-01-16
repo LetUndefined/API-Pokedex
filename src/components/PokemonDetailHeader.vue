@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import { formatNumber } from '@/utils/formatting';
 
 const router = useRouter();
 
@@ -17,10 +18,6 @@ defineProps({
     required: true,
   },
 });
-
-function formatNumber(num) {
-  return num.toString().padStart(3, '0');
-}
 </script>
 
 <template>
@@ -48,6 +45,7 @@ header {
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 200px;
+  text-transform: capitalize;
 }
 
 .header-row-item {
