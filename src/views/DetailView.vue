@@ -14,11 +14,11 @@ import { usePokemonStore } from '@/stores/pokemon';
 const route = useRoute();
 const chosenPokemon = ref(null);
 const pokemonStore = usePokemonStore();
-const { getPokemonById } = pokemonStore;
+const { fetchPokemonById } = pokemonStore;
 
-onMounted(() => {
+onMounted(async () => {
   const pokemonId = Number(route.params.id);
-  chosenPokemon.value = getPokemonById(pokemonId);
+  chosenPokemon.value = await fetchPokemonById(pokemonId);
   console.log(chosenPokemon.value);
 });
 </script>

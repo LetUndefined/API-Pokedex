@@ -5,9 +5,15 @@ import PokemonList from '@/components/PokemonList.vue';
 
 import { usePokemonStore } from '@/stores/pokemon';
 import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 
 const pokemonStore = usePokemonStore();
 const { pokemonList } = storeToRefs(pokemonStore);
+const { fetchPokemonList } = pokemonStore;
+
+onMounted(async () => {
+  await fetchPokemonList();
+});
 </script>
 
 <template>

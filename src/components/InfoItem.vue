@@ -50,6 +50,8 @@ section {
   align-items: center;
   justify-content: space-between;
   gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .info-data {

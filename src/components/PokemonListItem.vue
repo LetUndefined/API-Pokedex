@@ -47,5 +47,6 @@ const router = useRouter();
 
 .pokemon-container p {
   font-size: 12px;
+  text-transform: capitalize;
 }
 </style>

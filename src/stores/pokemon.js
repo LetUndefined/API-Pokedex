@@ -2,83 +2,59 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const usePokemonStore = defineStore('pokemon', () => {
-  const pokemonList = ref([
-    {
-      id: 1,
-      name: 'bulbasaur',
-      types: ['grass', 'poison'],
-      weight: 6.9,
-      height: 0.7,
-      moves: ['Chlorophyll', 'Overgrow'],
-      description:
-        'There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.',
-      stats: {
-        hp: 45,
-        atk: 49,
-        def: 49,
-        satk: 65,
-        sdef: 65,
-        spd: 45,
-      },
-    },
-    {
-      id: 4,
-      name: 'charmander',
-      types: ['fire'],
-      weight: 8.5,
-      height: 0.6,
-      moves: ['Mega-Punch', 'Fire-Punch'],
-      description:
-        'It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail.',
-      stats: {
-        hp: 39,
-        atk: 52,
-        def: 43,
-        satk: 60,
-        sdef: 50,
-        spd: 65,
-      },
-    },
-    {
-      id: 7,
-      name: 'squirtle',
-      types: ['water'],
-      weight: 9.0,
-      height: 0.5,
-      moves: ['Torrent', 'Rain-Dish'],
-      description:
-        'When it retracts its long neck into its shell, it squirts out water with vigorous force.',
-      stats: {
-        hp: 44,
-        atk: 48,
-        def: 65,
-        satk: 50,
-        sdef: 64,
-        spd: 43,
-      },
-    },
-    {
-      id: 25,
-      name: 'pikachu',
-      types: ['electric'],
-      weight: 6.0,
-      height: 0.4,
-      moves: ['Mega-Punch', 'Pay-Day'],
-      description:
-        'Pikachu that can generate powerful electricity have cheek sacs that are extra soft and super stretchy.',
-      stats: {
-        hp: 35,
-        atk: 55,
-        def: 40,
-        satk: 50,
-        sdef: 50,
-        spd: 90,
-      },
-    },
-  ]);
+  const pokemonList = ref([]);
+  const fetchPokemonList = async () => {
+    try {
+      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+      const data = await response.json();
 
-  const getPokemonById = (pokemon) => {
-    return pokemonList.value.find((e) => e.id === pokemon);
+      const list = data.results;
+
+      pokemonList.value = list.map((pokemon) => {
+        const splittedUrl = pokemon.url.split('/');
+        const id = Number(splittedUrl[splittedUrl.length - 2]);
+        return {
+          id,
+          name: pokemon.name,
+        };
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
-  return { pokemonList, getPokemonById };
+
+  function fixWords(moves) {
+    return moves.replace(/-/g, ' ').replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
+  }
+
+  function getRandomMoves(moves, amount = 2) {
+    const randomMoves = [...moves].sort(() => 0.5 - Math.random()).slice(0, amount);
+    const names = randomMoves.map((item) => fixWords(item.move.name));
+    return names;
+  }
+
+  const fetchPokemonById = async (id) => {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const data = await response.json();
+    const pokemon = {
+      id: data.id,
+      name: data.name,
+      types: data.types.map((item) => item.type.name),
+      weight: data.weight / 10,
+      height: data.height / 10,
+      moves: getRandomMoves(data.moves),
+      description: 'NOG NIET GEKEND',
+      stats: {
+        hp: data.stats.find((item) => item.stat.name === 'hp').base_stat,
+        atk: data.stats.find((item) => item.stat.name === 'attack').base_stat,
+        def: data.stats.find((item) => item.stat.name === 'defense').base_stat,
+        satk: data.stats.find((item) => item.stat.name === 'special-attack').base_stat,
+        sdef: data.stats.find((item) => item.stat.name === 'special-defense').base_stat,
+        spd: data.stats.find((item) => item.stat.name === 'speed').base_stat,
+      },
+    };
+    return pokemon;
+  };
+
+  return { pokemonList, fetchPokemonById, fetchPokemonList, fixWords };
 });
