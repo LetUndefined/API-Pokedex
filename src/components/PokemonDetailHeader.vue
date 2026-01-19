@@ -30,7 +30,7 @@ defineProps({
       <span>#{{ formatNumber(id) }}</span>
     </div>
     <div class="image">
-      <img :src="`/public/${name}.png`" alt="" />
+      <img :src="`/src/assets/images/${name}.png`" alt="" />
     </div>
   </header>
 </template>
@@ -83,5 +83,9 @@ header {
 .image img {
   max-width: 225px;
   max-height: 225px;
+}
+
+span {
+  font-weight: 400;
 }
 </style>

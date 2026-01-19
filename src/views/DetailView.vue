@@ -99,24 +99,18 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 0 0 0;
   width: 100%;
 }
 
 .info-section {
   display: flex;
   justify-content: space-evenly;
-  align-items: flex-end;
   gap: 1rem;
   padding-bottom: 0.5rem;
 }
 
 .info-section + section p {
   font-size: 12px;
-}
-
-.stats-detail-section {
-  display: flex;
-  flex-direction: column;
 }
 </style>

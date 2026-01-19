@@ -1,15 +1,15 @@
 <script setup lang="ts">
-  defineProps({
-    title: {
-      type: String,
-      required: true,
-    },
-    color: {
-      type: String,
-      required: false,
-      default: 'gray',
-    },
-  });
+defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  color: {
+    type: String,
+    required: false,
+    default: 'gray',
+  },
+});
 </script>
 
 <template>
@@ -23,15 +23,15 @@
 </template>
 
 <style scoped>
-  .detail-view-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.detail-view-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-  h2 {
-    font-size: 1.25rem;
-    text-align: center;
-  }
+h2 {
+  font-size: 1.25rem;
+  text-align: center;
+}
 </style>
