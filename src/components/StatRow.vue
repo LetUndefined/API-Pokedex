@@ -49,6 +49,7 @@ defineProps({
 .stat-label {
   min-width: 3rem;
   text-align: right;
+  font-size: 14px;
 }
 
 .stat-value {

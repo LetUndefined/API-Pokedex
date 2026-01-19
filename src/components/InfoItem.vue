@@ -77,5 +77,6 @@ section {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.25rem;
+  font-size: 14px;
 }
 </style>

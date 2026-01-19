@@ -120,7 +120,6 @@ main {
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
-  padding-bottom: 0.5rem;
 }
 
 .info-section + section p {
