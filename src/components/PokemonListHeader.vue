@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import pokeball from '@/assets/pokeball.svg';
 import search from '@/assets/search-2.svg';
+import { usePokemonStore } from '@/stores/pokemon';
+import { storeToRefs } from 'pinia';
+
+const store = usePokemonStore();
+const { inputValue } = storeToRefs(store);
 </script>
 
 <template>
@@ -11,7 +16,7 @@ import search from '@/assets/search-2.svg';
     </div>
     <div class="search-container">
       <img class="search" :src="search" alt="search" name="search" />
-      <input type="text" id="Search" placeholder="Search" />
+      <input v-model="inputValue" type="text" id="Search" placeholder="Search" />
     </div>
   </header>
 </template>
@@ -55,5 +60,6 @@ header img {
 
 input {
   border: none;
+  outline: none;
 }
 </style>

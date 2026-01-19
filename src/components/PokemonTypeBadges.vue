@@ -34,7 +34,7 @@ defineProps({
   <span class="type" :class="`type-${type}`"> {{ type }} </span>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 span {
   padding: 0.2rem 0.5rem;
   color: #ffffff;
@@ -42,75 +42,39 @@ span {
   text-transform: capitalize;
 }
 
-.type-normal {
-  background-color: var(--type-normal);
-}
+$type-colors: (
+  normal: var(--type-normal),
+  fighting: var(--type-fighting),
+  flying: var(--type-flying),
+  poison: var(--type-poison),
+  ground: var(--type-ground),
+  rock: var(--type-rock),
+  bug: var(--type-bug),
+  ghost: var(--type-ghost),
+  steel: var(--type-steel),
+  fire: var(--type-fire),
+  water: var(--type-water),
+  grass: var(--type-grass),
+  electric: var(--type-electric),
+  psychic: var(--type-psychic),
+  ice: var(--type-ice),
+  dragon: var(--type-dragon),
+  dark: var(--type-dark),
+  fairy: var(--type-fairy),
+);
 
-.type-fighting {
-  background-color: var(--type-fighting);
-}
+.type {
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: var(--color-grayscale-white);
 
-.type-flying {
-  background-color: var(--type-flying);
-}
-
-.type-poison {
-  background-color: var(--type-poison);
-}
-
-.type-ground {
-  background-color: var(--type-ground);
-}
-
-.type-rock {
-  background-color: var(--type-rock);
-}
-
-.type-bug {
-  background-color: var(--type-bug);
-}
-
-.type-ghost {
-  background-color: var(--type-ghost);
-}
-
-.type-steel {
-  background-color: var(--type-steel);
-}
-
-.type-fire {
-  background-color: var(--type-fire);
-}
-
-.type-water {
-  background-color: var(--type-water);
-}
-
-.type-grass {
-  background-color: var(--type-grass);
-}
-
-.type-electric {
-  background-color: var(--type-electric);
-}
-
-.type-psychic {
-  background-color: var(--type-psychic);
-}
-
-.type-ice {
-  background-color: var(--type-ice);
-}
-
-.type-dragon {
-  background-color: var(--type-dragon);
-}
-
-.type-dark {
-  background-color: var(--type-dark);
-}
-
-.type-fairy {
-  background-color: var(--type-fairy);
+  @each $type, $color in $type-colors {
+    &-#{$type} {
+      background-color: $color;
+    }
+  }
 }
 </style>

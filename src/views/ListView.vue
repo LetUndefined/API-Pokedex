@@ -9,11 +9,14 @@ import { onMounted } from 'vue';
 import LoadingIndicator from '@/components/LoadingIndicator.vue';
 
 const pokemonStore = usePokemonStore();
-const { pokemonList } = storeToRefs(pokemonStore);
+
 const { fetchPokemonList } = pokemonStore;
 const { isLoading } = storeToRefs(pokemonStore);
+const { filterPokemon } = storeToRefs(pokemonStore);
+const { inputValue } = storeToRefs(pokemonStore);
 
 onMounted(async () => {
+  inputValue.value = '';
   await fetchPokemonList();
 });
 </script>
@@ -22,10 +25,11 @@ onMounted(async () => {
   <LoadingIndicator v-if="isLoading" />
   <div v-else class="list-view">
     <pokemon-list-header />
+
     <main>
       <PokemonList>
         <pokemon-list-item
-          v-for="pokemon in pokemonList"
+          v-for="pokemon in filterPokemon"
           :key="pokemon.id"
           :name="pokemon.name"
           :id="pokemon.id"

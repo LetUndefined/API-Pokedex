@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 export const usePokemonStore = defineStore('pokemon', () => {
   const pokemonList = ref([]);
   const isLoading = ref(true);
+  const inputValue = ref('');
 
   const fetchPokemonList = async () => {
     try {
@@ -49,6 +50,12 @@ export const usePokemonStore = defineStore('pokemon', () => {
     return randomValue[0].flavor_text;
   }
 
+  const filterPokemon = computed(() => {
+    return pokemonList.value.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(inputValue.value.toLowerCase()),
+    );
+  });
+
   const fetchPokemonById = async (id) => {
     isLoading.value = true;
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -79,5 +86,13 @@ export const usePokemonStore = defineStore('pokemon', () => {
     return pokemon;
   };
 
-  return { pokemonList, fetchPokemonById, fetchPokemonList, fixWords, isLoading };
+  return {
+    pokemonList,
+    fetchPokemonById,
+    fetchPokemonList,
+    fixWords,
+    isLoading,
+    inputValue,
+    filterPokemon,
+  };
 });
