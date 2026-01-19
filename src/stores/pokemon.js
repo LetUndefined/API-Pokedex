@@ -3,8 +3,11 @@ import { ref } from 'vue';
 
 export const usePokemonStore = defineStore('pokemon', () => {
   const pokemonList = ref([]);
+  const isLoading = ref(true);
+
   const fetchPokemonList = async () => {
     try {
+      isLoading.value = true;
       const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
       const data = await response.json();
 
@@ -13,15 +16,22 @@ export const usePokemonStore = defineStore('pokemon', () => {
       pokemonList.value = list.map((pokemon) => {
         const splittedUrl = pokemon.url.split('/');
         const id = Number(splittedUrl[splittedUrl.length - 2]);
+
         return {
           id,
           name: pokemon.name,
         };
       });
+      isLoading.value = false;
     } catch (error) {
       console.error(error);
     }
   };
+
+  function getRandomItems(items, amount = 1) {
+    const randomItems = [...items].sort(() => 0.5 - Math.random()).slice(0, amount);
+    return randomItems;
+  }
 
   function fixWords(moves) {
     return moves.replace(/-/g, ' ').replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
@@ -33,9 +43,21 @@ export const usePokemonStore = defineStore('pokemon', () => {
     return names;
   }
 
+  function getDescriptions(options) {
+    const filteredDescr = options.filter((e) => e.language.name === 'en');
+    const randomValue = getRandomItems(filteredDescr);
+    return randomValue[0].flavor_text;
+  }
+
   const fetchPokemonById = async (id) => {
+    isLoading.value = true;
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const data = await response.json();
+
+    const pokemonSpeciesResponse = await fetch(data.species.url);
+    const pokemonSpeciesData = await pokemonSpeciesResponse.json();
+    const description = getDescriptions(pokemonSpeciesData.flavor_text_entries);
+
     const pokemon = {
       id: data.id,
       name: data.name,
@@ -43,7 +65,7 @@ export const usePokemonStore = defineStore('pokemon', () => {
       weight: data.weight / 10,
       height: data.height / 10,
       moves: getRandomMoves(data.moves),
-      description: 'NOG NIET GEKEND',
+      description: description,
       stats: {
         hp: data.stats.find((item) => item.stat.name === 'hp').base_stat,
         atk: data.stats.find((item) => item.stat.name === 'attack').base_stat,
@@ -53,8 +75,9 @@ export const usePokemonStore = defineStore('pokemon', () => {
         spd: data.stats.find((item) => item.stat.name === 'speed').base_stat,
       },
     };
+    isLoading.value = false;
     return pokemon;
   };
 
-  return { pokemonList, fetchPokemonById, fetchPokemonList, fixWords };
+  return { pokemonList, fetchPokemonById, fetchPokemonList, fixWords, isLoading };
 });

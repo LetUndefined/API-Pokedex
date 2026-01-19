@@ -10,20 +10,23 @@ import WeightIcon from '@/assets/weight.svg';
 import HeightIcon from '@/assets/straighten.svg';
 import PokemonNotFound from '@/components/PokemonNotFound.vue';
 import { usePokemonStore } from '@/stores/pokemon';
+import { storeToRefs } from 'pinia';
+import LoadingIndicator from '@/components/LoadingIndicator.vue';
 
 const route = useRoute();
 const chosenPokemon = ref(null);
 const pokemonStore = usePokemonStore();
 const { fetchPokemonById } = pokemonStore;
+const { isLoading } = storeToRefs(pokemonStore);
 
 onMounted(async () => {
   const pokemonId = Number(route.params.id);
   chosenPokemon.value = await fetchPokemonById(pokemonId);
-  console.log(chosenPokemon.value);
 });
 </script>
 
 <template>
+  <LoadingIndicator v-if="isLoading" />
   <template v-if="chosenPokemon">
     <div class="container" :style="{ backgroundColor: `var(--type-${chosenPokemon.types[0]}` }">
       <PokemonDetailHeader
@@ -80,6 +83,12 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .main-container {
   display: flex;
   justify-content: center;
@@ -89,10 +98,14 @@ onMounted(async () => {
   gap: 1rem;
   border-radius: 8px;
   padding: 1rem;
+  flex: 1;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
   padding: 0.25rem;
+  min-height: 100vh;
 }
 
 .types-section {

@@ -83,6 +83,7 @@ header {
 .image img {
   max-width: 225px;
   max-height: 225px;
+  z-index: 999;
 }
 
 span {

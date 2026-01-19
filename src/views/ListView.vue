@@ -6,10 +6,12 @@ import PokemonList from '@/components/PokemonList.vue';
 import { usePokemonStore } from '@/stores/pokemon';
 import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
+import LoadingIndicator from '@/components/LoadingIndicator.vue';
 
 const pokemonStore = usePokemonStore();
 const { pokemonList } = storeToRefs(pokemonStore);
 const { fetchPokemonList } = pokemonStore;
+const { isLoading } = storeToRefs(pokemonStore);
 
 onMounted(async () => {
   await fetchPokemonList();
@@ -17,7 +19,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="list-view">
+  <LoadingIndicator v-if="isLoading" />
+  <div v-else class="list-view">
     <pokemon-list-header />
     <main>
       <PokemonList>
