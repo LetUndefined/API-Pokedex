@@ -30,7 +30,7 @@ defineProps({
       <span>#{{ formatNumber(id) }}</span>
     </div>
     <div class="image">
-      <img :src="`/src/assets/images/${name}.png`" alt="" />
+      <img :src="`${$baseUrl}images/${name}.png`" alt="" />
     </div>
   </header>
 </template>
